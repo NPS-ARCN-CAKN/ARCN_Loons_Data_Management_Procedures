@@ -1,24 +1,115 @@
 # Data Management Lifecycle And Procedures
 
-This section covers the data management life cycle for the Yellow-billed loons monitoring program after data is collected. For field data collection procedures and methods follow the standard operating procedures in (@flamme2018, Figure XX.) available from the [Yellow-billed loons Project Reference](https://irma.nps.gov/DataStore/Reference/Profile/2216938) in the NPS Data Store.
+The YBLO monitoring team recognizes the importance of following a fastidious and disciplined data management life cycle to promote data longevity and informational quality over an anticipated term of decades.
+
+This section covers the data management life cycle for the Yellow-billed loons monitoring program after data is collected. For field data collection procedures and methods follow the standard operating procedures in (@flamme2018) available from the [Yellow-billed loons Project Reference](https://irma.nps.gov/DataStore/Reference/Profile/2216938) in the NPS Data Store.
 
 ## Collect data according to the YBLO standard operating procedures
 
-Follow the directions in the loons monitoring protocol and SOPs at <https://irma.nps.gov/DataStore/Reference/Profile/2216938>
+Follow the data collection SOPs in the loons monitoring protocol and SOPs at <https://irma.nps.gov/DataStore/Reference/Profile/2216938>
 
 ## Organize and re-name raw data deliverable files
 
-File organization and naming procedures are in the [Deliverables Schedule](DeliverablesSchedule.html)
+Upon returning from a field survey the first task is to organize and re-name raw field data deliverables in the loons monitoring shared directory (`O:\Monitoring\Vital Signs\Yellow-billed Loons\Data`).
 
-Deliverables must follow the standards of the Deliverables Schedule. Doing so will assure future users know what is what, and will aid in backtracking data processing procedures if errors are discovered. Our goal is reproducibility and the highest data quality possible. Read the Deliverables Schedule and/or familiarize yourself with how the previous year's data files are named and organized in the loons monitoring files directory.
+File organization and naming procedures are in the [Deliverables Schedule](DeliverablesSchedule.html) and personnel are expected to follow them closely. Doing so will assure future users know what is what, and will aid in backtracking data processing procedures if errors are discovered. Our goal is reproducibility and the highest data quality possible. Look over the Deliverables Schedule and/or familiarize yourself with how the previous year's data files are named and organized in the loons monitoring files directory. These file names are recorded in the database so that users can back-track, following a chain of processing steps to raw deliverable files if problems are encountered in the future.
 
 ## Process the deliverables for quality and logical consistency
 
-There are no specific procedures for processing data quality, other than the suggestion to use a reproducible science platform such as R Markdown or Quarto, Python/Jupyter notebooks, etc. to document the procedures you undertook and data sources you used. These processing scripts are described as deliverable YB12 and should be named appropriately (`YB12 2023 Loon Survey Data Processing Script.rmd`, for example) and archived with the other deliverables.
+There are no specific procedures for processing data quality, other than the suggestion to use a reproducible science platform such as R Markdown or Quarto, Python/Jupyter notebooks, etc. to document the procedures you undertook and data sources you used.
+
+Putting effort into creating tidy data will make all the following data processing procedures easier. If you are not familiar with the concept of tidy data then please read @wickham2014tidydata (a fantastic, quick read that will make your life as a scientist much easier).
+
+Look in prior year's data directories at data processing scripts prefixed with 'YB12' to see how data were processed for quality and database integration.
+
+Look for:
+
+-   Missing or erroneous spatial coordinates
+
+-   Missing or impossible Plot numbers
+
+-   Incidental (non-Plot) observations
+
+-   Extraneous (non-protocol mandated) wildlife sightings
+
+-   Consistent and standard species codes
+
+-   Missing counts, nest, pair or other poor quality records
+
+-   Validate the data against a report, if available
+
+Data processing scripts are a deliverable (YB12) and should be saved in the survey's data directory and name similar to 'YB12 YYYY Loon Survey DESCRIPTION.ext'. Example: `YB12 2023 Loon Survey Data Processing Script.rmd`.
 
 ## Integrate the deliverables with the master loons monitoring database
 
 Once the loon observations, lakes, plots and other files are processed you enter them into the loons monitoring SQL Server database. There are many methods to transfer data from deliverable files into a database. SQL Server Management Studio has a data import/export wizard. R and Python have packages and methods for moving data. You could also use Excel formulas to generate a series of INSERT queries. Data from 2005 - 2023 were moved via R scripts. Look for those scripts, prefixed with 'YB12' in the loons directories or References in Data Store. Modify the scripts as needed.
+
+One easy way is to shape the dataset that is to be imported into the database such that each column is named exactly the same as the schema of the database's SurveyData table. Then you can generate a script of SQL INSERT queries using this function:
+
+```{r,eval=FALSE,echo=TRUE}
+# Function to convert a data frame into SQL INSERT queries
+DataFrameToSQLInsertQueries <- function(SourceDataFrame, DestinationTableName) {
+  
+  # Helper: convert a single value to SQL literal
+  ToSQLValue <- function(x) {
+    if (is.na(x)) {
+      return("NULL")
+    }
+    
+    if (trimws(x) == '') {
+      return("NULL")
+    }
+    
+    if (is.character(x) || is.factor(x)) {
+      x <- as.character(x)
+      x <- gsub("'", "''", x)
+      return(paste0("'", x, "'"))
+    }
+    
+    if (inherits(x, "Date") || inherits(x, "POSIXct")) {
+      return(paste0("'", as.character(x), "'"))
+    }
+    
+    if (is.logical(x)) {
+      return(ifelse(x, "1", "0"))
+    }
+    
+    # numeric / integer → leave unquoted
+    return(as.character(x))
+  }
+  
+  # Get the source column names from the source data frame
+  SourceColumnNames <- paste0("[", names(SourceDataFrame), "]", collapse = ",")
+  
+  # Build INSERT queries
+  InsertQueries <- lapply(seq_len(nrow(SourceDataFrame)), function(i) {
+    Row <- SourceDataFrame[i, , drop = FALSE]   # preserve types
+    Values <- mapply(ToSQLValue, Row)
+    SQLValues <- paste(Values, collapse = ", ")
+    
+    paste0("-- ",i,"\nINSERT INTO [", DestinationTableName, "](", SourceColumnNames, ")\nVALUES(",SQLValues, ");")
+  })
+  
+  unlist(InsertQueries)
+}
+
+
+# START HERE: -----------------------------------------------------------------------------
+# The DataFrameToSQLInsertQueries function converts a data frame (data, in example) to a series of SQL Insert queries
+# The column names of the source data frame (data, in the example below)
+# must exactly match the destination column names in the loons monitoring database
+DestinationTableName = "SurveyData"
+SQLFile = paste0(r'(C:\Temp\z)'," ",DestinationDatabase,"-",DestinationTableName,".sql")
+SQL <- DataFrameToSQLInsertQueries(data,DestinationTableName)
+SQLScript <- c(
+  paste0("-- SQL INSERT queries script generated by ",Sys.info()[["user"]]," on ",Sys.Date()),
+  paste0("USE [",DestinationDatabase,"];"),
+  "BEGIN TRANSACTION; -- COMMIT ROLLBACK -- Don't forget to commit or rollback or the database will be left in a hanging state.",
+  SQL
+)
+# Uncomment to write the INSERT queries to file
+# writeLines(SQLScript, SQLFile)
+```
 
 ## Run automated quality control procedures and repair/document defects
 
@@ -42,11 +133,15 @@ The ARCN data manager has written numerous scripts in R Markdown and Quarto to g
 
 The loons monitoring database has three levels of certification to describe data quality.
 
-Raw = unprocessed data direct from the field
+The NPS Arctic Network applies a tiered approach to communicating data quality. Records are tagged according to three levels of data quality as described in Table 1.
 
-Provisional = data that have undergone quality processing, but have not been certified, or cannot be certified because no report exists to validate the results. These data are suitable for internal reports.
+Table 1. Data quality definitions. The CertificationLevel is an attribute of the database's `SurveyData` table.
 
-Certified = records that have undergon quality processing and been validated against secondary reports or authorized for distribution by the project leader. Certified records are analytical grade.
+| Certification level | Definition |
+|--------------------|----------------------------------------------------|
+| Raw | Raw data that have not undergone any processing for quality. |
+| Provisional | Provisional records have undergone quality control checks, defects have been rectified and/or documented and the survey results are suitable for internal reports. Observations have not been certified for release by the principal investigator, or have not been validated with a report or published journal article. |
+| Certified | Certified records have undergone rigorous quality control checks, defects have been rectified and/or documented and the survey results have been validated with a report or published journal article or have been approved for release by the principal investigator. Certified records are analytical grade. |
 
 Validate the records against a report, if available, or request certification approval from the project leader. Once this is done update the loons database `SurveyData.CertificationLevel` attribute to '`Certified`'. Also change the `CertificationDate` to the current date and the `CertifiedBy` attribute to your name.
 
