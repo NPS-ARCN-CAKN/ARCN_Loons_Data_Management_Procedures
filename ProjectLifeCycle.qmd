@@ -151,9 +151,17 @@ Validate the records against a report, if available, or request certification ap
 
 ## Publish the dataset
 
-Important note on data publication: Loons monitoring data are considered sensitive data and protections are in place. Do not publish loons monitoring data publicly. See
+### Sensitivity
 
-Loons monitoring data are published in two ways:
+**Portions of the loons monitoring dataset are SENSITIVE and PROTECTED** ([@koelsch2019]). See [Data ownership and sensitivity](DataSensitivity.html).
+
+Do not publish loons and nest locations publicly.
+
+### Data Store Reference Types
+
+Loons monitoring data must be published to the NPS Data Store in two ways (Table 1).
+
+Table 1. Two major methods of data publication in the NPS Data Store. Both methods must respect protected data mandates.
 
 | Dataset type | Public | Analytical grade | Description |
 |-----------|-----|----------|-----------------------------------------------|
@@ -162,17 +170,99 @@ Loons monitoring data are published in two ways:
 
 *\*The link to this Data Store Reference is current as of this writing, but will change as the Certified Dataset Reference is versioned over time. Data Store points users from older versions to newer versions of datasets, so clicking the link shown will lead you to the latest version.*
 
-### Annual survey deliverables publication
+#### Annual survey files publication
 
-The raw and processed annual survey data deliverables are published privately in the IRMA Data Store (Figure 2). These files are not intended to be published to the public, but rather are archived for NPS use in case questions arise later on data or methodology. The best procedure to follow is to look at the previous year's data in loons shared drive as well as the [Deliverables Schedule](DeliverablesSchedule.html) and make sure all the files are named correctly and the deliverables are as complete as possible. From there go to the master [Loons Project Reference in Data store](https://irma.nps.gov/DataStore/Reference/Profile/2216938) and look at the previous year's metadata and files. The easiest course of action is to [clone](https://irma.nps.gov/DataStore/DownloadFile/626171) last year's Reference, modify the metadata, upload the newest files, and activate the clone as a new Reference. Be sure to [link the new Reference as a Product](https://irma.nps.gov/DataStore/DownloadFile/626210)of the [master Project Reference](https://irma.nps.gov/DataStore/Reference/Profile/2216938) so that it's all tidy.
+The raw and processed annual survey data deliverables are published privately in the IRMA Data Store (Figure 2). These files are not intended to be published to the public, but rather are archived for NPS use in case questions arise later on data or methodology.
+
+Procedure:
+
+1.  Ensure that the annual survey files are in the loons monitoring shared drive, in a directory tagged with the year and all deliverables are named according to the scheme in the Deliverables Schedule (see Figure 1 for an example), and data files are documented with metadata, as needed.
+
+2.  Navigate to the [Loons Monitoring Project Reference in Data Store](https://irma.nps.gov/DataStore/Reference/Profile/2216938) and find the last survey's Geospatial Dataset Reference.
+
+3.  Clone last year's Geospatial Dataset Reference. Consult the [Data Store Help](https://irma.nps.gov/Content/DataStore/Help/), if needed.
+
+4.  Modify the details to suit the current survey.
+
+5.  Upload the current year's deliverable files as holdings *\[Note: this is your last chance to make sure the files are absolutely correct. Once the Reference is activated you will not be able to change them out. You will have to version the Reference to make corrections, or contact the IRMA team for help.\]*
+
+6.  Ensure the permissions are correct. The Reference will be public, by default, but file access should be NPS-Internal (private).
+
+7.  Activate the Reference.
+
+8.  Next you will add the new Reference as a Product of the loons monitoring Project Reference. Copy the Reference code.
+
+9.  Open the [Loons Monitoring Project Reference in Data Store](https://irma.nps.gov/DataStore/Reference/Profile/2216938) in edit mode.
+
+10. Navigate to Products.
+
+11. Link the new Geospatial Dataset Reference as a Product.
+
+12. Ensure the new Reference shows up as a Product of the Project Reference.
+
+13. Extra credit: Data Store does not sort Products logically. Move the new Reference up so that it sorts nicely and logically with the other Products.
+
+**Tips**
+
+-   Look at the previous survey's data in the loons shared drive (Figure 1) as well as the [Deliverables Schedule](DeliverablesSchedule.html) and make sure all the files are named correctly and the deliverables are as complete as possible.
+
+-   Look at a previous survey's Geospatial Dataset Reference (Figure 2).
+
+-   Go to the master [Loons Project Reference in Data store](https://irma.nps.gov/DataStore/Reference/Profile/2216938) and look at the previous year's Products metadata and files.
+
+-   Contact the ARCN data manager for assistance.
 
 ![](images/clipboard-3271303711.png){width="520"}
 
 Figure 2. Example of an annual loon survey deliverables archived as a Geospatial Dataset in NPS Data Store. Annual survey files (see Deliverables Schedule and Figure 1.) are archived as private, NPS-Internal References in Data Store.
 
-### Certified dataset publication
+#### Certified dataset publication
 
-Certified dataset. This dataset is cumulative. Each year's data is appended to the loons monitoring master database and then the `Dataset_Certified` query exported to a CSV file and the [Certified Dataset Reference](https://irma.nps.gov/DataStore/Reference/Profile/2316912) in Data Store is versioned with the new file.
+Publishing the certified dataset is relatively straightforward. The dataset is cumulative - each year's data is appended to the SurveyData table in the loons monitoring master database. From there the `Dataset_Certified` query is exported to a CSV file. Then, the [Certified Dataset Reference](https://irma.nps.gov/DataStore/Reference/Profile/2316912) in Data Store is versioned with the new file.
+
+**Procedure:**
+
+1.  Examine the loons monitoring database contents. Ensure the latest survey data are imported into the database, have undergone quality control procedures, and all records to be published have the attribute `CertificationLevel` tagged as '`Provisional`' or '`Certified`' (records tagged 'Raw' will be excluded from the `Dataset_Certified` view).
+
+2.  Navigate to `O:\Monitoring\Vital Signs\Yellow-billed Loons\Data\Certified dataset and d`elete all the files (this is just a temporary storage location - these files should already be in Data Store).
+
+**Method 1: SQL Server Management Express/Excel**
+
+1.  Next, open SQL Server Management Studio, open the Object Explorer and navigate to the ARCN_Loons database.
+
+2.  Click New Query...
+
+3.  Execute `SELECT * FROM Dataset_Certified`
+
+4.  The data appears in a grid. Right click the grid and select 'Copy with headers'.
+
+5.  Open Microsoft Excel and paste the data.
+
+6.  Save the data as Comma Separated Values text file to the Certified Dataset directory described above.
+
+**Method 2: R script (better)**
+
+1.  In a browser navigate to the [ARCN_Loons_R_Scripts](https://github.com/NPS-ARCN-CAKN/ARCN_Loons_R_Scripts) GitHub repository
+
+2.  Either fork the repository, download it as a .zip archive, or copy the contents of `ARCN Loons Certified Dataset Release Report.Qmd` into a new .Qmd file in R Studio.
+
+3.  The script is well documented. Follow the directions to export the `Dataset_Certified` view to a CSV file (contact the ARCN data manager for permissions. The script will also generate a Data Release Report.
+
+**Version the Certified Dataset Geospatial Dataset Reference in Data Store**
+
+1.  Open the [Certified Dataset Reference](https://irma.nps.gov/DataStore/Reference/Profile/2316912) in a browser. You may need to request permissions from the ARCN data manager.
+
+2.  Clone it.
+
+3.  Modify the details.
+
+4.  Upload the certified dataset CSV file you created above.
+
+5.  Optionally, generate a Data Release Report (described above) and upload it.
+
+6.  Ensure the file access is NPS-Internal.
+
+7.  Activate the Reference.
 
 ## Review and revise the Standard Operating Procedures
 
