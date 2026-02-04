@@ -10,9 +10,13 @@ Follow the data collection SOPs in the loons monitoring protocol and SOPs at <ht
 
 ## Organize and re-name raw data deliverable files
 
-Upon returning from a field survey the first task is to organize and re-name raw field data deliverables in the loons monitoring shared directory (`O:\Monitoring\Vital Signs\Yellow-billed Loons\Data`).
+Upon returning from a field survey the first task is to organize and re-name raw field data deliverables in the loons monitoring shared directory (`O:\Monitoring\Vital Signs\Yellow-billed Loons\Data`). Figure 1 shows an example of a well organized data directory.
 
 File organization and naming procedures are in the [Deliverables Schedule](DeliverablesSchedule.html) and personnel are expected to follow them closely. Doing so will assure future users know what is what, and will aid in backtracking data processing procedures if errors are discovered. Our goal is reproducibility and the highest data quality possible. Look over the Deliverables Schedule and/or familiarize yourself with how the previous year's data files are named and organized in the loons monitoring files directory. These file names are recorded in the database so that users can back-track, following a chain of processing steps to raw deliverable files if problems are encountered in the future.
+
+![](images/clipboard-979262005.png)
+
+Figure 1. A well organized loon survey data deliverables directory. Raw data files are separate from final, processed deliverables. Filenames are tagged with their deliverable identifiers. Data processing and quality control scripts and summaries are included.
 
 ## Process the deliverables for quality and logical consistency
 
@@ -147,11 +151,24 @@ Validate the records against a report, if available, or request certification ap
 
 ## Publish the dataset
 
-Loons monitoring data are published as either NPS-Internal raw deliverables datasets, or as a certified dataset. See the sections below.
+Important note on data publication: Loons monitoring data are considered sensitive data and protections are in place. Do not publish loons monitoring data publicly. See
 
-### Raw deliverables publication
+Loons monitoring data are published in two ways:
 
-The raw and processed annual survey data deliverables are published privately in the IRMA Data Store. These files are not intended to be published to the public, but rather are archived for NPS use in case questions arise later on data or methodology. The best procedure to follow is to look at the previous year's data in loons shared drive as well as the [Deliverables Schedule](DeliverablesSchedule.html) and make sure all the files are named correctly and the deliverables are as complete as possible. From there go to the master [Loons Project Reference in Data store](https://irma.nps.gov/DataStore/Reference/Profile/2216938) and look at the previous year's metadata and files. The easiest course of action is to [clone](https://irma.nps.gov/DataStore/DownloadFile/626171) last year's Reference, modify the metadata, upload the newest files, and activate the clone as a new Reference. Be sure to [link the new Reference as a Product](https://irma.nps.gov/DataStore/DownloadFile/626210)of the [master Project Reference](https://irma.nps.gov/DataStore/Reference/Profile/2216938) so that it's all tidy.
+| Dataset type | Public | Analytical grade | Description |
+|-----------|-----|----------|-----------------------------------------------|
+| Annual survey files | No | No | This dataset type consists of data files and documentation from an individual, annual loon survey. *These data are archival grade and are not certified for analysis*. They are retained in Data Store in case errors are detected, or clarification is needed in the future. |
+| [Certified cumulative dataset](https://irma.nps.gov/DataStore/Reference/Profile/2316912)\* | No | Yes | The certified, cumulative dataset is intended for analytical use. Each survey year data are processed for quality and appended into the master loons monitoring SQL Server database. Once data are certified new data and metadata files are exported and the [Certified Dataset Reference](https://irma.nps.gov/DataStore/Reference/Profile/2316912)\* is [versioned](https://irma.nps.gov/DataStore/DownloadFile/717239), modified, and the new files attached. |
+
+*\*The link to this Data Store Reference is current as of this writing, but will change as the Certified Dataset Reference is versioned over time. Data Store points users from older versions to newer versions of datasets, so clicking the link shown will lead you to the latest version.*
+
+### Annual survey deliverables publication
+
+The raw and processed annual survey data deliverables are published privately in the IRMA Data Store (Figure 2). These files are not intended to be published to the public, but rather are archived for NPS use in case questions arise later on data or methodology. The best procedure to follow is to look at the previous year's data in loons shared drive as well as the [Deliverables Schedule](DeliverablesSchedule.html) and make sure all the files are named correctly and the deliverables are as complete as possible. From there go to the master [Loons Project Reference in Data store](https://irma.nps.gov/DataStore/Reference/Profile/2216938) and look at the previous year's metadata and files. The easiest course of action is to [clone](https://irma.nps.gov/DataStore/DownloadFile/626171) last year's Reference, modify the metadata, upload the newest files, and activate the clone as a new Reference. Be sure to [link the new Reference as a Product](https://irma.nps.gov/DataStore/DownloadFile/626210)of the [master Project Reference](https://irma.nps.gov/DataStore/Reference/Profile/2216938) so that it's all tidy.
+
+![](images/clipboard-3271303711.png){width="520"}
+
+Figure 2. Example of an annual loon survey deliverables archived as a Geospatial Dataset in NPS Data Store. Annual survey files (see Deliverables Schedule and Figure 1.) are archived as private, NPS-Internal References in Data Store.
 
 ### Certified dataset publication
 

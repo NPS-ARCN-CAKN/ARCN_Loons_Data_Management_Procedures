@@ -163,6 +163,11 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./DataSensitivity.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data ownership and sensitivity</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./DeliverablesSchedule.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Deliverables Schedule</span></a>
   </div>
@@ -197,7 +202,7 @@ div.csl-indent {
   <li><a href="#certify-the-dataset" id="toc-certify-the-dataset" class="nav-link" data-scroll-target="#certify-the-dataset">Certify the dataset</a></li>
   <li><a href="#publish-the-dataset" id="toc-publish-the-dataset" class="nav-link" data-scroll-target="#publish-the-dataset">Publish the dataset</a>
   <ul class="collapse">
-  <li><a href="#raw-deliverables-publication" id="toc-raw-deliverables-publication" class="nav-link" data-scroll-target="#raw-deliverables-publication">Raw deliverables publication</a></li>
+  <li><a href="#annual-survey-deliverables-publication" id="toc-annual-survey-deliverables-publication" class="nav-link" data-scroll-target="#annual-survey-deliverables-publication">Annual survey deliverables publication</a></li>
   <li><a href="#certified-dataset-publication" id="toc-certified-dataset-publication" class="nav-link" data-scroll-target="#certified-dataset-publication">Certified dataset publication</a></li>
   </ul></li>
   <li><a href="#review-and-revise-the-standard-operating-procedures" id="toc-review-and-revise-the-standard-operating-procedures" class="nav-link" data-scroll-target="#review-and-revise-the-standard-operating-procedures">Review and revise the Standard Operating Procedures</a></li>
@@ -227,20 +232,22 @@ div.csl-indent {
 
 
 <p>The YBLO monitoring team recognizes the importance of following a fastidious and disciplined data management life cycle to promote data longevity and informational quality over an anticipated term of decades.</p>
-<p>This section covers the data management life cycle for the Yellow-billed loons monitoring program after data is collected. For field data collection procedures and methods follow the standard operating procedures in (<span class="citation" data-cites="flamme2018">Flamme and Miller (<a href="References.html#ref-flamme2018" role="doc-biblioref">2018</a>)</span>) available from the <a href="https://irma.nps.gov/DataStore/Reference/Profile/2216938">Yellow-billed loons Project Reference</a> in the NPS Data Store.</p>
+<p>This section covers the data management life cycle for the Yellow-billed loons monitoring program after data is collected. For field data collection procedures and methods follow the standard operating procedures in (<span class="citation" data-cites="flamme2018">Flamme and Miller (<a href="#ref-flamme2018" role="doc-biblioref">2018</a>)</span>) available from the <a href="https://irma.nps.gov/DataStore/Reference/Profile/2216938">Yellow-billed loons Project Reference</a> in the NPS Data Store.</p>
 <section id="collect-data-according-to-the-yblo-standard-operating-procedures" class="level2">
 <h2 class="anchored" data-anchor-id="collect-data-according-to-the-yblo-standard-operating-procedures">Collect data according to the YBLO standard operating procedures</h2>
 <p>Follow the data collection SOPs in the loons monitoring protocol and SOPs at <a href="https://irma.nps.gov/DataStore/Reference/Profile/2216938" class="uri">https://irma.nps.gov/DataStore/Reference/Profile/2216938</a></p>
 </section>
 <section id="organize-and-re-name-raw-data-deliverable-files" class="level2">
 <h2 class="anchored" data-anchor-id="organize-and-re-name-raw-data-deliverable-files">Organize and re-name raw data deliverable files</h2>
-<p>Upon returning from a field survey the first task is to organize and re-name raw field data deliverables in the loons monitoring shared directory (<code>O:\Monitoring\Vital Signs\Yellow-billed Loons\Data</code>).</p>
+<p>Upon returning from a field survey the first task is to organize and re-name raw field data deliverables in the loons monitoring shared directory (<code>O:\Monitoring\Vital Signs\Yellow-billed Loons\Data</code>). Figure 1 shows an example of a well organized data directory.</p>
 <p>File organization and naming procedures are in the <a href="DeliverablesSchedule.html">Deliverables Schedule</a> and personnel are expected to follow them closely. Doing so will assure future users know what is what, and will aid in backtracking data processing procedures if errors are discovered. Our goal is reproducibility and the highest data quality possible. Look over the Deliverables Schedule and/or familiarize yourself with how the previous year’s data files are named and organized in the loons monitoring files directory. These file names are recorded in the database so that users can back-track, following a chain of processing steps to raw deliverable files if problems are encountered in the future.</p>
+<p><img src="images/clipboard-979262005.png" class="img-fluid"></p>
+<p>Figure 1. A well organized loon survey data deliverables directory. Raw data files are separate from final, processed deliverables. Filenames are tagged with their deliverable identifiers. Data processing and quality control scripts and summaries are included.</p>
 </section>
 <section id="process-the-deliverables-for-quality-and-logical-consistency" class="level2">
 <h2 class="anchored" data-anchor-id="process-the-deliverables-for-quality-and-logical-consistency">Process the deliverables for quality and logical consistency</h2>
 <p>There are no specific procedures for processing data quality, other than the suggestion to use a reproducible science platform such as R Markdown or Quarto, Python/Jupyter notebooks, etc. to document the procedures you undertook and data sources you used.</p>
-<p>Putting effort into creating tidy data will make all the following data processing procedures easier. If you are not familiar with the concept of tidy data then please read <span class="citation" data-cites="wickham2014tidydata">Wickham (<a href="References.html#ref-wickham2014tidydata" role="doc-biblioref">2014</a>)</span> (a fantastic, quick read that will make your life as a scientist much easier).</p>
+<p>Putting effort into creating tidy data will make all the following data processing procedures easier. If you are not familiar with the concept of tidy data then please read <span class="citation" data-cites="wickham2014tidydata">Wickham (<a href="#ref-wickham2014tidydata" role="doc-biblioref">2014</a>)</span> (a fantastic, quick read that will make your life as a scientist much easier).</p>
 <p>Look in prior year’s data directories at data processing scripts prefixed with ‘YB12’ to see how data were processed for quality and database integration.</p>
 <p>Look for:</p>
 <ul>
@@ -377,10 +384,38 @@ div.csl-indent {
 </section>
 <section id="publish-the-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="publish-the-dataset">Publish the dataset</h2>
-<p>Loons monitoring data are published as either NPS-Internal raw deliverables datasets, or as a certified dataset. See the sections below.</p>
-<section id="raw-deliverables-publication" class="level3">
-<h3 class="anchored" data-anchor-id="raw-deliverables-publication">Raw deliverables publication</h3>
-<p>The raw and processed annual survey data deliverables are published privately in the IRMA Data Store. These files are not intended to be published to the public, but rather are archived for NPS use in case questions arise later on data or methodology. The best procedure to follow is to look at the previous year’s data in loons shared drive as well as the <a href="DeliverablesSchedule.html">Deliverables Schedule</a> and make sure all the files are named correctly and the deliverables are as complete as possible. From there go to the master <a href="https://irma.nps.gov/DataStore/Reference/Profile/2216938">Loons Project Reference in Data store</a> and look at the previous year’s metadata and files. The easiest course of action is to <a href="https://irma.nps.gov/DataStore/DownloadFile/626171">clone</a> last year’s Reference, modify the metadata, upload the newest files, and activate the clone as a new Reference. Be sure to <a href="https://irma.nps.gov/DataStore/DownloadFile/626210">link the new Reference as a Product</a>of the <a href="https://irma.nps.gov/DataStore/Reference/Profile/2216938">master Project Reference</a> so that it’s all tidy.</p>
+<p>Important note on data publication: Loons monitoring data are considered sensitive data and protections are in place. Do not publish loons monitoring data publicly. See</p>
+<p>Loons monitoring data are published in two ways:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Dataset type</th>
+<th>Public</th>
+<th>Analytical grade</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Annual survey files</td>
+<td>No</td>
+<td>No</td>
+<td>This dataset type consists of data files and documentation from an individual, annual loon survey. <em>These data are archival grade and are not certified for analysis</em>. They are retained in Data Store in case errors are detected, or clarification is needed in the future.</td>
+</tr>
+<tr class="even">
+<td><a href="https://irma.nps.gov/DataStore/Reference/Profile/2316912">Certified cumulative dataset</a>*</td>
+<td>No</td>
+<td>Yes</td>
+<td>The certified, cumulative dataset is intended for analytical use. Each survey year data are processed for quality and appended into the master loons monitoring SQL Server database. Once data are certified new data and metadata files are exported and the <a href="https://irma.nps.gov/DataStore/Reference/Profile/2316912">Certified Dataset Reference</a>* is <a href="https://irma.nps.gov/DataStore/DownloadFile/717239">versioned</a>, modified, and the new files attached.</td>
+</tr>
+</tbody>
+</table>
+<p><em>*The link to this Data Store Reference is current as of this writing, but will change as the Certified Dataset Reference is versioned over time. Data Store points users from older versions to newer versions of datasets, so clicking the link shown will lead you to the latest version.</em></p>
+<section id="annual-survey-deliverables-publication" class="level3">
+<h3 class="anchored" data-anchor-id="annual-survey-deliverables-publication">Annual survey deliverables publication</h3>
+<p>The raw and processed annual survey data deliverables are published privately in the IRMA Data Store (Figure 2). These files are not intended to be published to the public, but rather are archived for NPS use in case questions arise later on data or methodology. The best procedure to follow is to look at the previous year’s data in loons shared drive as well as the <a href="DeliverablesSchedule.html">Deliverables Schedule</a> and make sure all the files are named correctly and the deliverables are as complete as possible. From there go to the master <a href="https://irma.nps.gov/DataStore/Reference/Profile/2216938">Loons Project Reference in Data store</a> and look at the previous year’s metadata and files. The easiest course of action is to <a href="https://irma.nps.gov/DataStore/DownloadFile/626171">clone</a> last year’s Reference, modify the metadata, upload the newest files, and activate the clone as a new Reference. Be sure to <a href="https://irma.nps.gov/DataStore/DownloadFile/626210">link the new Reference as a Product</a>of the <a href="https://irma.nps.gov/DataStore/Reference/Profile/2216938">master Project Reference</a> so that it’s all tidy.</p>
+<p><img src="images/clipboard-3271303711.png" class="img-fluid" width="520"></p>
+<p>Figure 2. Example of an annual loon survey deliverables archived as a Geospatial Dataset in NPS Data Store. Annual survey files (see Deliverables Schedule and Figure 1.) are archived as private, NPS-Internal References in Data Store.</p>
 </section>
 <section id="certified-dataset-publication" class="level3">
 <h3 class="anchored" data-anchor-id="certified-dataset-publication">Certified dataset publication</h3>
@@ -392,7 +427,7 @@ div.csl-indent {
 <p>If any methodologies have improved or changed significantly then update the <a href="https://irma.nps.gov/DataStore/Reference/Profile/2216938">SOPs</a>.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-flamme2018" class="csl-entry" role="listitem">
 Flamme, J. H. Schmidt, M., and S. D. Miller. 2018. <span>“Yellow-Billed Loon Monitoring Protocol for the Arctic Network: Protocol Narrative Version 1.0.”</span> Natural Resource Report NPS/ARCN/NRR—2018/1738. Fort Collins, Colorado: National Park Service. <a href="https://irma.nps.gov/DataStore/Reference/Profile/2256435">https://irma.nps.gov/DataStore/Reference/Profile/2256435</a>.
 </div>

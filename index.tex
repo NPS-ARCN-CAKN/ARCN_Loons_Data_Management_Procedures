@@ -66,6 +66,46 @@
 \fi
 \makeatother
 
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
 
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
@@ -178,8 +218,6 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
-  pdftitle={ARCN Loons Data Management Procedures},
-  pdfauthor={Scott D. Miller Data Manager},
   colorlinks=true,
   linkcolor={blue},
   filecolor={Maroon},
@@ -188,13 +226,10 @@
   pdfcreator={LaTeX via pandoc}}
 
 
-\title{ARCN Loons Data Management Procedures}
-\author{Scott D. Miller\\
-Data Manager}
-\date{2025-12-17}
+\author{}
+\date{}
 
 \begin{document}
-\maketitle
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -205,16 +240,59 @@ Data Manager}
 
 \bookmarksetup{startatroot}
 
-\chapter*{Introduction}\label{introduction}
-\addcontentsline{toc}{chapter}{Introduction}
+\chapter*{National Park Service Yellow-billed Loons Monitoring Data
+Management
+Procedures}\label{national-park-service-yellow-billed-loons-monitoring-data-management-procedures}
+\addcontentsline{toc}{chapter}{National Park Service Yellow-billed Loons
+Monitoring Data Management Procedures}
 
-\markboth{Introduction}{Introduction}
+\markboth{National Park Service Yellow-billed Loons Monitoring Data
+Management Procedures}{National Park Service Yellow-billed Loons
+Monitoring Data Management Procedures}
+
+Scott D. Miller\\
+Information Technology Specialist\\
+U.S. Department of the Interior\\
+240 W. 5th Ave.\\
+Anchorage, AK 99501
 
 This book contains data management procedures for the National Park
 Service's Yellow-billed loons monitoring program in Bering Land Bridge
 National Preserve and Cape Krusenstern National Monument, Alaska.
 
 See Flamme and Miller (2018) for the monitoring protocol.
+
+\bookmarksetup{startatroot}
+
+\chapter{Data ownership and
+sensitivity}\label{data-ownership-and-sensitivity}
+
+Data collected by the National Park Service, with limited exceptions are
+in the public domain:
+
+\emph{Data and content created by government employees within the scope
+of their employment are not subject to domestic copyright protection
+under 17 U.S.C. 105. Government works are by default in the U.S. Public
+Domain.}
+
+Portions of the Yellow-billed and Red-throated loons monitoring data
+containing spatial locations of loons and nests are considered sensitive
+data by the National Park Service, and are not to be shared with the
+general public.
+
+\emph{Under National Parks Omnibus Management Act, Section 207, of 16
+U.S.C. § 5937; Specific location (geographic coordinates) of this
+species of concern will not be released to the general public due to
+their global rarity and nest site fidelity. Any such data collected will
+be redacted from the publicly released datasets. This protects
+collaborating agencies data as well; but does not preclude sharing
+between collaborating agencies. Processed data with coordinates redacted
+(such as summaries, processed maps, or products) remain publicly
+available. This will be done indefinitely (}(Koelsch 2019)\emph{).}
+
+Data not considered sensitive, such as plot locations, lake perimeters,
+data summaries and secondary datasets not prohibited by the above
+restrictions are to be distributed freely as U.S. Public Works.
 
 \bookmarksetup{startatroot}
 
@@ -242,7 +320,7 @@ YB01 & Survey geodatabase (YBLO.gdb) \\
 YB02 & Park Observer files \\
 YB03 & Waypoints \\
 YB04 & Data collection forms, booklets and field notebooks \\
-YB05 & Certified database snapshot \\
+YB05 & Deprecated \\
 YB06 & Observations data file \\
 YB07 & Tracklogs \\
 YB08 & Lakes dataset \\
@@ -352,28 +430,22 @@ YYYY represents the integer year of the survey.
 
 \bookmarksetup{startatroot}
 
-\chapter*{YB05: Certified database
-snapshot}\label{yb05-certified-database-snapshot}
-\addcontentsline{toc}{chapter}{YB05: Certified database snapshot}
+\chapter*{YB05: Deprecated}\label{yb05-deprecated}
+\addcontentsline{toc}{chapter}{YB05: Deprecated}
 
-\markboth{YB05: Certified database snapshot}{YB05: Certified database
-snapshot}
+\markboth{YB05: Deprecated}{YB05: Deprecated}
 
-\emph{Format:} Human and machine readable text file format.
+\emph{Format:} NA
 
-\emph{Schedule:} Remeasurement + 1 year
+\emph{Schedule:} NA
 
-\emph{Responsibility:} DM
+\emph{Responsibility:} NA
 
-\emph{Description:} A snapshot loons monitoring certified dataset for
-publication.
+\emph{Description:} NA
 
-\emph{Specifications:} Human and machine readable text format (JSON,
-CSV, or other).
+\emph{Specifications:} NA
 
-\emph{FileNamingScheme:} Deliverable YB05 should be named {[}YB05' YYYY
-Loon Survey Certified database snapshot{]} where YYYY represents the
-integer year of the survey.
+\emph{FileNamingScheme:} NA
 
 \bookmarksetup{startatroot}
 
@@ -479,7 +551,7 @@ the survey.
 
 \markboth{YB10: Deprecated}{YB10: Deprecated}
 
-\emph{Format:} Deprecated
+\emph{Format:} NA
 
 \emph{Schedule:} NA
 
@@ -489,9 +561,7 @@ the survey.
 
 \emph{Specifications:} NA
 
-\emph{FileNamingScheme:} Deliverable YB10 should be named {[}YB10' YYYY
-Loon Survey Deprecated{]} where YYYY represents the integer year of the
-survey.
+\emph{FileNamingScheme:} NA
 
 \bookmarksetup{startatroot}
 
@@ -542,39 +612,354 @@ year of the survey.
 
 \bookmarksetup{startatroot}
 
-\chapter{Data Management Lifecycle}\label{data-management-lifecycle}
+\chapter{Data Management Lifecycle And
+Procedures}\label{data-management-lifecycle-and-procedures}
+
+The YBLO monitoring team recognizes the importance of following a
+fastidious and disciplined data management life cycle to promote data
+longevity and informational quality over an anticipated term of decades.
 
 This section covers the data management life cycle for the Yellow-billed
 loons monitoring program after data is collected. For field data
 collection procedures and methods follow the standard operating
-procedures in (Flamme and Miller (2018), Figure XX.) available from the
+procedures in (Flamme and Miller (2018)) available from the
 \href{https://irma.nps.gov/DataStore/Reference/Profile/2216938}{Yellow-billed
 loons Project Reference} in the NPS Data Store.
 
+\section{Collect data according to the YBLO standard operating
+procedures}\label{collect-data-according-to-the-yblo-standard-operating-procedures}
+
+Follow the data collection SOPs in the loons monitoring protocol and
+SOPs at \url{https://irma.nps.gov/DataStore/Reference/Profile/2216938}
+
+\section{Organize and re-name raw data deliverable
+files}\label{organize-and-re-name-raw-data-deliverable-files}
+
+Upon returning from a field survey the first task is to organize and
+re-name raw field data deliverables in the loons monitoring shared
+directory
+(\texttt{O:\textbackslash{}Monitoring\textbackslash{}Vital\ Signs\textbackslash{}Yellow-billed\ Loons\textbackslash{}Data}).
+Figure 1 shows an example of a well organized data directory.
+
+File organization and naming procedures are in the
+\href{DeliverablesSchedule.html}{Deliverables Schedule} and personnel
+are expected to follow them closely. Doing so will assure future users
+know what is what, and will aid in backtracking data processing
+procedures if errors are discovered. Our goal is reproducibility and the
+highest data quality possible. Look over the Deliverables Schedule
+and/or familiarize yourself with how the previous year's data files are
+named and organized in the loons monitoring files directory. These file
+names are recorded in the database so that users can back-track,
+following a chain of processing steps to raw deliverable files if
+problems are encountered in the future.
+
+\pandocbounded{\includegraphics[keepaspectratio]{images/clipboard-979262005.png}}
+
+Figure 1. A well organized loon survey data deliverables directory. Raw
+data files are separate from final, processed deliverables. Filenames
+are tagged with their deliverable identifiers. Data processing and
+quality control scripts and summaries are included.
+
+\section{Process the deliverables for quality and logical
+consistency}\label{process-the-deliverables-for-quality-and-logical-consistency}
+
+There are no specific procedures for processing data quality, other than
+the suggestion to use a reproducible science platform such as R Markdown
+or Quarto, Python/Jupyter notebooks, etc. to document the procedures you
+undertook and data sources you used.
+
+Putting effort into creating tidy data will make all the following data
+processing procedures easier. If you are not familiar with the concept
+of tidy data then please read Wickham (2014) (a fantastic, quick read
+that will make your life as a scientist much easier).
+
+Look in prior year's data directories at data processing scripts
+prefixed with `YB12' to see how data were processed for quality and
+database integration.
+
+Look for:
+
 \begin{itemize}
-\tightlist
 \item
-  Collect data according to the YBLO standard operating procedures
+  Missing or erroneous spatial coordinates
 \item
-  Organize and re-name raw data deliverable files s in the YBLO shared
-  network (O:\textbackslash) drive according to the
-  \href{DeliverablesSchedule.html}{Deliverables Schedule}.
+  Missing or impossible Plot numbers
 \item
+  Incidental (non-Plot) observations
+\item
+  Extraneous (non-protocol mandated) wildlife sightings
+\item
+  Consistent and standard species codes
+\item
+  Missing counts, nest, pair or other poor quality records
+\item
+  Validate the data against a report, if available
 \end{itemize}
 
-\bookmarksetup{startatroot}
+Data processing scripts are a deliverable (YB12) and should be saved in
+the survey's data directory and name similar to `YB12 YYYY Loon Survey
+DESCRIPTION.ext'. Example:
+\texttt{YB12\ 2023\ Loon\ Survey\ Data\ Processing\ Script.rmd}.
 
-\chapter{Procedure 1: Organize field
-deliverables}\label{procedure-1-organize-field-deliverables}
+\section{Integrate the deliverables with the master loons monitoring
+database}\label{integrate-the-deliverables-with-the-master-loons-monitoring-database}
 
-\bookmarksetup{startatroot}
+Once the loon observations, lakes, plots and other files are processed
+you enter them into the loons monitoring SQL Server database. There are
+many methods to transfer data from deliverable files into a database.
+SQL Server Management Studio has a data import/export wizard. R and
+Python have packages and methods for moving data. You could also use
+Excel formulas to generate a series of INSERT queries. Data from 2005 -
+2023 were moved via R scripts. Look for those scripts, prefixed with
+`YB12' in the loons directories or References in Data Store. Modify the
+scripts as needed.
 
-\chapter{Database Integration}\label{database-integration}
+One easy way is to shape the dataset that is to be imported into the
+database such that each column is named exactly the same as the schema
+of the database's SurveyData table. Then you can generate a script of
+SQL INSERT queries using this function:
 
-This book contains data management procedures for the National Park
-Service's Yellow-billed loons monitoring program in Bering Land Bridge
-National Preserve and Cape Krusenstern National Monument, Alaska. See
-(\textbf{knuth84?}) for additional discussion of literate programming.
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Function to convert a data frame into SQL INSERT queries}
+\NormalTok{DataFrameToSQLInsertQueries }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(SourceDataFrame, DestinationTableName) \{}
+  
+  \CommentTok{\# Helper: convert a single value to SQL literal}
+\NormalTok{  ToSQLValue }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{}
+    \ControlFlowTok{if}\NormalTok{ (}\FunctionTok{is.na}\NormalTok{(x)) \{}
+      \FunctionTok{return}\NormalTok{(}\StringTok{"NULL"}\NormalTok{)}
+\NormalTok{    \}}
+    
+    \ControlFlowTok{if}\NormalTok{ (}\FunctionTok{trimws}\NormalTok{(x) }\SpecialCharTok{==} \StringTok{\textquotesingle{}\textquotesingle{}}\NormalTok{) \{}
+      \FunctionTok{return}\NormalTok{(}\StringTok{"NULL"}\NormalTok{)}
+\NormalTok{    \}}
+    
+    \ControlFlowTok{if}\NormalTok{ (}\FunctionTok{is.character}\NormalTok{(x) }\SpecialCharTok{||} \FunctionTok{is.factor}\NormalTok{(x)) \{}
+\NormalTok{      x }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(x)}
+\NormalTok{      x }\OtherTok{\textless{}{-}} \FunctionTok{gsub}\NormalTok{(}\StringTok{"\textquotesingle{}"}\NormalTok{, }\StringTok{"\textquotesingle{}\textquotesingle{}"}\NormalTok{, x)}
+      \FunctionTok{return}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{"\textquotesingle{}"}\NormalTok{, x, }\StringTok{"\textquotesingle{}"}\NormalTok{))}
+\NormalTok{    \}}
+    
+    \ControlFlowTok{if}\NormalTok{ (}\FunctionTok{inherits}\NormalTok{(x, }\StringTok{"Date"}\NormalTok{) }\SpecialCharTok{||} \FunctionTok{inherits}\NormalTok{(x, }\StringTok{"POSIXct"}\NormalTok{)) \{}
+      \FunctionTok{return}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{"\textquotesingle{}"}\NormalTok{, }\FunctionTok{as.character}\NormalTok{(x), }\StringTok{"\textquotesingle{}"}\NormalTok{))}
+\NormalTok{    \}}
+    
+    \ControlFlowTok{if}\NormalTok{ (}\FunctionTok{is.logical}\NormalTok{(x)) \{}
+      \FunctionTok{return}\NormalTok{(}\FunctionTok{ifelse}\NormalTok{(x, }\StringTok{"1"}\NormalTok{, }\StringTok{"0"}\NormalTok{))}
+\NormalTok{    \}}
+    
+    \CommentTok{\# numeric / integer → leave unquoted}
+    \FunctionTok{return}\NormalTok{(}\FunctionTok{as.character}\NormalTok{(x))}
+\NormalTok{  \}}
+  
+  \CommentTok{\# Get the source column names from the source data frame}
+\NormalTok{  SourceColumnNames }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\StringTok{"["}\NormalTok{, }\FunctionTok{names}\NormalTok{(SourceDataFrame), }\StringTok{"]"}\NormalTok{, }\AttributeTok{collapse =} \StringTok{","}\NormalTok{)}
+  
+  \CommentTok{\# Build INSERT queries}
+\NormalTok{  InsertQueries }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(}\FunctionTok{seq\_len}\NormalTok{(}\FunctionTok{nrow}\NormalTok{(SourceDataFrame)), }\ControlFlowTok{function}\NormalTok{(i) \{}
+\NormalTok{    Row }\OtherTok{\textless{}{-}}\NormalTok{ SourceDataFrame[i, , drop }\OtherTok{=} \ConstantTok{FALSE}\NormalTok{]   }\CommentTok{\# preserve types}
+\NormalTok{    Values }\OtherTok{\textless{}{-}} \FunctionTok{mapply}\NormalTok{(ToSQLValue, Row)}
+\NormalTok{    SQLValues }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(Values, }\AttributeTok{collapse =} \StringTok{", "}\NormalTok{)}
+    
+    \FunctionTok{paste0}\NormalTok{(}\StringTok{"{-}{-} "}\NormalTok{,i,}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{INSERT INTO ["}\NormalTok{, DestinationTableName, }\StringTok{"]("}\NormalTok{, SourceColumnNames, }\StringTok{")}\SpecialCharTok{\textbackslash{}n}\StringTok{VALUES("}\NormalTok{,SQLValues, }\StringTok{");"}\NormalTok{)}
+\NormalTok{  \})}
+  
+  \FunctionTok{unlist}\NormalTok{(InsertQueries)}
+\NormalTok{\}}
+
+
+\CommentTok{\# START HERE: {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\CommentTok{\# The DataFrameToSQLInsertQueries function converts a data frame (data, in example) to a series of SQL Insert queries}
+\CommentTok{\# The column names of the source data frame (data, in the example below)}
+\CommentTok{\# must exactly match the destination column names in the loons monitoring database}
+\NormalTok{DestinationTableName }\OtherTok{=} \StringTok{"SurveyData"}
+\NormalTok{SQLFile }\OtherTok{=} \FunctionTok{paste0}\NormalTok{(r}\StringTok{\textquotesingle{}(C:\textbackslash{}Temp\textbackslash{}z)\textquotesingle{}}\NormalTok{,}\StringTok{" "}\NormalTok{,DestinationDatabase,}\StringTok{"{-}"}\NormalTok{,DestinationTableName,}\StringTok{".sql"}\NormalTok{)}
+\NormalTok{SQL }\OtherTok{\textless{}{-}} \FunctionTok{DataFrameToSQLInsertQueries}\NormalTok{(data,DestinationTableName)}
+\NormalTok{SQLScript }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}
+  \FunctionTok{paste0}\NormalTok{(}\StringTok{"{-}{-} SQL INSERT queries script generated by "}\NormalTok{,}\FunctionTok{Sys.info}\NormalTok{()[[}\StringTok{"user"}\NormalTok{]],}\StringTok{" on "}\NormalTok{,}\FunctionTok{Sys.Date}\NormalTok{()),}
+  \FunctionTok{paste0}\NormalTok{(}\StringTok{"USE ["}\NormalTok{,DestinationDatabase,}\StringTok{"];"}\NormalTok{),}
+  \StringTok{"BEGIN TRANSACTION; {-}{-} COMMIT ROLLBACK {-}{-} Don\textquotesingle{}t forget to commit or rollback or the database will be left in a hanging state."}\NormalTok{,}
+\NormalTok{  SQL}
+\NormalTok{)}
+\CommentTok{\# Uncomment to write the INSERT queries to file}
+\CommentTok{\# writeLines(SQLScript, SQLFile)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Run automated quality control procedures and repair/document
+defects}\label{run-automated-quality-control-procedures-and-repairdocument-defects}
+
+\subsubsection{Queries}\label{queries}
+
+The loons monitoring SQL Server database has numerous quality control
+tests that can be done. Views (queries) prefixed by `QC\_' are quality
+control views that will show potential errors. Use judgement, some
+results are warnings (Lake or Plot is NULL, for example) and not
+critical. Others show critical errors such as observations missing
+spatial coordinates.
+
+\subsubsection{Stored procedure}\label{stored-procedure}
+
+There is a stored procedure called \texttt{spDataQualityReport} that you
+may execute or open and run line by line to elucidate potential data
+quality problems. Run it by executing
+\texttt{EXEC\ spDataQualityReport}. This stored procedure is best
+executed with the results sent to text, rather than grids. See SSMS
+help.
+
+\subsubsection{Quality control scripts}\label{quality-control-scripts}
+
+The ARCN data manager has written numerous automated quality control and
+data summarization scripts in R Markdown and Quarto. {[}Put GitHub link
+here when updated.{]}
+
+\section{Preliminarily analyze the data -\textgreater{} Reprocess for
+quality if errors are further
+detected}\label{preliminarily-analyze-the-data---reprocess-for-quality-if-errors-are-further-detected}
+
+The ARCN data manager has written numerous scripts in R Markdown and
+Quarto to generate quality control reports, data release reports and
+survey reports. These are available at {[}GitHub link goes here{]}.
+
+\section{Certify the dataset}\label{certify-the-dataset}
+
+The loons monitoring database has three levels of certification to
+describe data quality.
+
+The NPS Arctic Network applies a tiered approach to communicating data
+quality. Records are tagged according to three levels of data quality as
+described in Table 1.
+
+Table 1. Data quality definitions. The CertificationLevel is an
+attribute of the database's \texttt{SurveyData} table.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.2778}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.7222}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Certification level
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Definition
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Raw & Raw data that have not undergone any processing for quality. \\
+Provisional & Provisional records have undergone quality control checks,
+defects have been rectified and/or documented and the survey results are
+suitable for internal reports. Observations have not been certified for
+release by the principal investigator, or have not been validated with a
+report or published journal article. \\
+Certified & Certified records have undergone rigorous quality control
+checks, defects have been rectified and/or documented and the survey
+results have been validated with a report or published journal article
+or have been approved for release by the principal investigator.
+Certified records are analytical grade. \\
+\end{longtable}
+
+Validate the records against a report, if available, or request
+certification approval from the project leader. Once this is done update
+the loons database \texttt{SurveyData.CertificationLevel} attribute to
+`\texttt{Certified}'. Also change the \texttt{CertificationDate} to the
+current date and the \texttt{CertifiedBy} attribute to your name.
+
+\section{Publish the dataset}\label{publish-the-dataset}
+
+Important note on data publication: Loons monitoring data are considered
+sensitive data and protections are in place. Do not publish loons
+monitoring data publicly. See
+
+Loons monitoring data are published in two ways:
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1507}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.0685}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1370}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.6438}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Dataset type
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Public
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Analytical grade
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Description
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Annual survey files & No & No & This dataset type consists of data files
+and documentation from an individual, annual loon survey. \emph{These
+data are archival grade and are not certified for analysis}. They are
+retained in Data Store in case errors are detected, or clarification is
+needed in the future. \\
+\href{https://irma.nps.gov/DataStore/Reference/Profile/2316912}{Certified
+cumulative dataset}* & No & Yes & The certified, cumulative dataset is
+intended for analytical use. Each survey year data are processed for
+quality and appended into the master loons monitoring SQL Server
+database. Once data are certified new data and metadata files are
+exported and the
+\href{https://irma.nps.gov/DataStore/Reference/Profile/2316912}{Certified
+Dataset Reference}* is
+\href{https://irma.nps.gov/DataStore/DownloadFile/717239}{versioned},
+modified, and the new files attached. \\
+\end{longtable}
+
+\emph{*The link to this Data Store Reference is current as of this
+writing, but will change as the Certified Dataset Reference is versioned
+over time. Data Store points users from older versions to newer versions
+of datasets, so clicking the link shown will lead you to the latest
+version.}
+
+\subsection{Annual survey deliverables
+publication}\label{annual-survey-deliverables-publication}
+
+The raw and processed annual survey data deliverables are published
+privately in the IRMA Data Store (Figure 2). These files are not
+intended to be published to the public, but rather are archived for NPS
+use in case questions arise later on data or methodology. The best
+procedure to follow is to look at the previous year's data in loons
+shared drive as well as the
+\href{DeliverablesSchedule.html}{Deliverables Schedule} and make sure
+all the files are named correctly and the deliverables are as complete
+as possible. From there go to the master
+\href{https://irma.nps.gov/DataStore/Reference/Profile/2216938}{Loons
+Project Reference in Data store} and look at the previous year's
+metadata and files. The easiest course of action is to
+\href{https://irma.nps.gov/DataStore/DownloadFile/626171}{clone} last
+year's Reference, modify the metadata, upload the newest files, and
+activate the clone as a new Reference. Be sure to
+\href{https://irma.nps.gov/DataStore/DownloadFile/626210}{link the new
+Reference as a Product}of the
+\href{https://irma.nps.gov/DataStore/Reference/Profile/2216938}{master
+Project Reference} so that it's all tidy.
+
+\includegraphics[width=5.41667in,height=\textheight,keepaspectratio]{images/clipboard-3271303711.png}
+
+Figure 2. Example of an annual loon survey deliverables archived as a
+Geospatial Dataset in NPS Data Store. Annual survey files (see
+Deliverables Schedule and Figure 1.) are archived as private,
+NPS-Internal References in Data Store.
+
+\subsection{Certified dataset
+publication}\label{certified-dataset-publication}
+
+Certified dataset. This dataset is cumulative. Each year's data is
+appended to the loons monitoring master database and then the
+\texttt{Dataset\_Certified} query exported to a CSV file and the
+\href{https://irma.nps.gov/DataStore/Reference/Profile/2316912}{Certified
+Dataset Reference} in Data Store is versioned with the new file.
+
+\section{Review and revise the Standard Operating
+Procedures}\label{review-and-revise-the-standard-operating-procedures}
+
+If any methodologies have improved or changed significantly then update
+the
+\href{https://irma.nps.gov/DataStore/Reference/Profile/2216938}{SOPs}.
 
 \bookmarksetup{startatroot}
 
@@ -591,6 +976,15 @@ Monitoring Protocol for the Arctic Network: Protocol Narrative Version
 1.0.''} Natural Resource Report NPS/ARCN/NRR---2018/1738. Fort Collins,
 Colorado: National Park Service.
 \url{https://irma.nps.gov/DataStore/Reference/Profile/2256435}.
+
+\bibitem[\citeproctext]{ref-koelsch2019}
+Koelsch, J. 2019. {``To: Wald EJ. Re: Handling of Protected Natural
+Resource Data - BELA.''}
+\url{https://irma.nps.gov/DataStore/Reference/Profile/2263477}.
+
+\bibitem[\citeproctext]{ref-wickham2014tidydata}
+Wickham, Hadley. 2014. {``Tidy Data.''} \emph{Journal of Statistical
+Software} 59 (10): 1--23. \url{https://doi.org/10.18637/jss.v059.i10}.
 
 \end{CSLReferences}
 
