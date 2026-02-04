@@ -1,10 +1,10 @@
 # Data ownership and sensitivity
 
-Data collected by the National Park Service, with limited exceptions are in the public domain:
+Data collected by the National Park Service, including loons data, are, with limited exceptions described below, in the public domain:
 
 *Data and content created by government employees within the scope of their employment are not subject to domestic copyright protection under 17 U.S.C. 105. Government works are by default in the U.S. Public Domain.*
 
-Portions of the Yellow-billed and Red-throated loons monitoring data containing spatial locations of loons and nests are considered sensitive data by the National Park Service, and are not to be shared with the general public.
+**Portions of the Yellow-billed and Red-throated loons monitoring data containing spatial locations of loons and nests are considered sensitive data by the National Park Service, and are not to be shared with the general public.**
 
 *Under National Parks Omnibus Management Act, Section 207, of 16 U.S.C. § 5937; Specific location (geographic coordinates) of this species of concern will not be released to the general public due to their global rarity and nest site fidelity. Any such data collected will be redacted from the publicly released datasets. This protects collaborating agencies data as well; but does not preclude sharing between collaborating agencies. Processed data with coordinates redacted (such as summaries, processed maps, or products) remain publicly available. This will be done indefinitely (*[@koelsch2019]*).*
 
