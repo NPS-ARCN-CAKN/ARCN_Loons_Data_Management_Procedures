@@ -2,9 +2,9 @@ project:
   type: book
 
 book:
-  title: "ARCN Loons Data Management Procedures"
-  author: "Scott D. Miller\n\nData Manager"
-  date: "12/17/2025"
+  title: ""
+  author: ""
+  date: ""
   chapters:
     - index.qmd
     - DeliverablesSchedule.qmd

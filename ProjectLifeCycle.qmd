@@ -1,4 +1,4 @@
-# Data Management Lifecycle
+# Data Management Lifecycle And Procedures
 
 This section covers the data management life cycle for the Yellow-billed loons monitoring program after data is collected. For field data collection procedures and methods follow the standard operating procedures in (@flamme2018, Figure XX.) available from the [Yellow-billed loons Project Reference](https://irma.nps.gov/DataStore/Reference/Profile/2216938) in the NPS Data Store.
 
@@ -6,7 +6,9 @@ This section covers the data management life cycle for the Yellow-billed loons m
 
 Follow the directions in the loons monitoring protocol and SOPs at <https://irma.nps.gov/DataStore/Reference/Profile/2216938>
 
-## Organize and re-name raw data deliverable files in the YBLO shared network (O:\\) drive according to the [Deliverables Schedule](DeliverablesSchedule.html)
+## Organize and re-name raw data deliverable files
+
+File organization and naming procedures are in the [Deliverables Schedule](DeliverablesSchedule.html)
 
 Deliverables must follow the standards of the Deliverables Schedule. Doing so will assure future users know what is what, and will aid in backtracking data processing procedures if errors are discovered. Our goal is reproducibility and the highest data quality possible. Read the Deliverables Schedule and/or familiarize yourself with how the previous year's data files are named and organized in the loons monitoring files directory.
 
