@@ -1,0 +1,600 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrreprt}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+% definitions for citeproc citations
+\NewDocumentCommand\citeproctext{}{}
+\NewDocumentCommand\citeproc{mm}{%
+  \begingroup\def\citeproctext{#2}\cite{#1}\endgroup}
+\makeatletter
+ % allow citations to break across lines
+ \let\@cite@ofmt\@firstofone
+ % avoid brackets around text for \cite:
+ \def\@biblabel#1{}
+ \def\@cite#1#2{{#1\if@tempswa , #2\fi}}
+\makeatother
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-indent, #2 entry-spacing
+ {\begin{list}{}{%
+  \setlength{\itemindent}{0pt}
+  \setlength{\leftmargin}{0pt}
+  \setlength{\parsep}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+   \setlength{\leftmargin}{\cslhangindent}
+   \setlength{\itemindent}{-1\cslhangindent}
+  \fi
+  % set entry spacing
+  \setlength{\itemsep}{#2\baselineskip}}}
+ {\end{list}}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{\hfill\break\parbox[t]{\linewidth}{\strut\ignorespaces#1\strut}}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{bookmark}{}{\usepackage{bookmark}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+
+\usepackage{bookmark}
+
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={ARCN Loons Data Management Procedures},
+  pdfauthor={Scott D. Miller Data Manager},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{ARCN Loons Data Management Procedures}
+\author{Scott D. Miller\\
+Data Manager}
+\date{2025-12-17}
+
+\begin{document}
+\maketitle
+
+\renewcommand*\contentsname{Table of contents}
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+
+\bookmarksetup{startatroot}
+
+\chapter*{Introduction}\label{introduction}
+\addcontentsline{toc}{chapter}{Introduction}
+
+\markboth{Introduction}{Introduction}
+
+This book contains data management procedures for the National Park
+Service's Yellow-billed loons monitoring program in Bering Land Bridge
+National Preserve and Cape Krusenstern National Monument, Alaska.
+
+See Flamme and Miller (2018) for the monitoring protocol.
+
+\bookmarksetup{startatroot}
+
+\chapter*{Deliverables Schedule}\label{deliverables-schedule}
+\addcontentsline{toc}{chapter}{Deliverables Schedule}
+
+\markboth{Deliverables Schedule}{Deliverables Schedule}
+
+The National Park Service's Western Yellow-billed Loons monitoring
+program will collect and maintain the following data deliverables. Each
+mandatory deliverable should be fulfilled during a survey and delivered
+to the ARCN data manager for integration with the master loons
+monitoring SQL Server database and the
+\href{https://irma.nps.gov/DataStore/Reference/Profile/2216938}{NPS Data
+Store}.
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Identifier & Deliverable \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+YB01 & Survey geodatabase (YBLO.gdb) \\
+YB02 & Park Observer files \\
+YB03 & Waypoints \\
+YB04 & Data collection forms, booklets and field notebooks \\
+YB05 & Certified database snapshot \\
+YB06 & Observations data file \\
+YB07 & Tracklogs \\
+YB08 & Lakes dataset \\
+YB09 & Plots dataset \\
+YB10 & Deprecated \\
+YB11 & Photographs \\
+YB12 & Data processing scripts \\
+\end{longtable}
+
+\bookmarksetup{startatroot}
+
+\chapter*{YB01: Survey geodatabase
+(YBLO.gdb)}\label{yb01-survey-geodatabase-yblo.gdb}
+\addcontentsline{toc}{chapter}{YB01: Survey geodatabase (YBLO.gdb)}
+
+\markboth{YB01: Survey geodatabase (YBLO.gdb)}{YB01: Survey geodatabase
+(YBLO.gdb)}
+
+\emph{Format:} Geospatial layer
+
+\emph{Schedule:} Remeasurement + 1 year
+
+\emph{Responsibility:} PI*
+
+\emph{Description:} Geodatabase containing processed QA/QC-checked
+survey data, including feature classes/layers of the loon and nest data.
+There is a different geodatabase for each year.
+
+\emph{Specifications:} Compressed .zip archive containing the
+geodatabase.
+
+\emph{FileNamingScheme:} Deliverable YB01 should be named {[}YB01' YYYY
+Loon Survey Survey geodatabase.zip {]} where YYYY represents the integer
+year of the survey.
+
+\bookmarksetup{startatroot}
+
+\chapter*{YB02: Park Observer files}\label{yb02-park-observer-files}
+\addcontentsline{toc}{chapter}{YB02: Park Observer files}
+
+\markboth{YB02: Park Observer files}{YB02: Park Observer files}
+
+\emph{Format:} .poz and/or comma separated values (CSV) text files.
+
+\emph{Schedule:} Remeasurement + 1 year
+
+\emph{Responsibility:} PI, DM
+
+\emph{Description:} Compressed .zip archive containing iPad Park
+Observer .pov files and affiliated geodatabase containing the raw, field
+collected data prior to importing and processing those data in the GIS.
+
+\emph{Specifications:} Park Observer files in compressed (.zip) format.
+Human and machine readable text format (JSON, CSV, or other).
+
+\emph{FileNamingScheme:} Deliverable YB02 should be named {[}YB02' YYYY
+Loon Survey Park Observer files.zip{]} where YYYY represents the integer
+year of the survey.
+
+\bookmarksetup{startatroot}
+
+\chapter*{YB03: Waypoints}\label{yb03-waypoints}
+\addcontentsline{toc}{chapter}{YB03: Waypoints}
+
+\markboth{YB03: Waypoints}{YB03: Waypoints}
+
+\emph{Format:} Human and machine readable text file format.
+
+\emph{Schedule:} Remeasurement + 1 year
+
+\emph{Responsibility:} PI
+
+\emph{Description:} Waypoints collected by the pilot or observer during
+a loon survey
+
+\emph{Specifications:} Human and machine readable text format (JSON,
+CSV, or other).
+
+\emph{FileNamingScheme:} Deliverable YB03 should be named {[}YB03' YYYY
+Loon Survey Waypoints{]} where YYYY represents the integer year of the
+survey.
+
+\bookmarksetup{startatroot}
+
+\chapter*{YB04: Data collection forms, booklets and field
+notebooks}\label{yb04-data-collection-forms-booklets-and-field-notebooks}
+\addcontentsline{toc}{chapter}{YB04: Data collection forms, booklets and
+field notebooks}
+
+\markboth{YB04: Data collection forms, booklets and field
+notebooks}{YB04: Data collection forms, booklets and field notebooks}
+
+\emph{Format:} Physical forms and TIFF or PDF scans
+
+\emph{Schedule:} Remeasurement + 1 year
+
+\emph{Responsibility:} PI
+
+\emph{Description:} Deliverable YB04 consists of physical paper data
+collection forms, if applicable.
+
+\emph{Specifications:} Legible paper printouts.
+
+\emph{FileNamingScheme:} Deliverable YB04 should be named {[}YB04' YYYY
+Loon Survey Data collection forms, booklets and field notebooks{]} where
+YYYY represents the integer year of the survey.
+
+\bookmarksetup{startatroot}
+
+\chapter*{YB05: Certified database
+snapshot}\label{yb05-certified-database-snapshot}
+\addcontentsline{toc}{chapter}{YB05: Certified database snapshot}
+
+\markboth{YB05: Certified database snapshot}{YB05: Certified database
+snapshot}
+
+\emph{Format:} Human and machine readable text file format.
+
+\emph{Schedule:} Remeasurement + 1 year
+
+\emph{Responsibility:} DM
+
+\emph{Description:} A snapshot loons monitoring certified dataset for
+publication.
+
+\emph{Specifications:} Human and machine readable text format (JSON,
+CSV, or other).
+
+\emph{FileNamingScheme:} Deliverable YB05 should be named {[}YB05' YYYY
+Loon Survey Certified database snapshot{]} where YYYY represents the
+integer year of the survey.
+
+\bookmarksetup{startatroot}
+
+\chapter*{YB06: Observations data
+file}\label{yb06-observations-data-file}
+\addcontentsline{toc}{chapter}{YB06: Observations data file}
+
+\markboth{YB06: Observations data file}{YB06: Observations data file}
+
+\emph{Format:} Comma separated values(CSV) text file.
+
+\emph{Schedule:} Remeasurement + 1 year
+
+\emph{Responsibility:} PI
+
+\emph{Description:} Deliverable YB06 consists of the digitized loons
+data collected during a survey. These data should be in comma separated
+values text file format.
+
+\emph{Specifications:} Human and machine readable text format (JSON,
+CSV, or other).
+
+\emph{FileNamingScheme:} Deliverable YB06 should be named {[}YB06' YYYY
+Loon Survey Observations data file{]} where YYYY represents the integer
+year of the survey.
+
+\bookmarksetup{startatroot}
+
+\chapter*{YB07: Tracklogs}\label{yb07-tracklogs}
+\addcontentsline{toc}{chapter}{YB07: Tracklogs}
+
+\markboth{YB07: Tracklogs}{YB07: Tracklogs}
+
+\emph{Format:} Human and machine readable text file format.
+
+\emph{Schedule:} Remeasurement + 1 year
+
+\emph{Responsibility:} PI
+
+\emph{Description:} Deliverable YB07 consists of the digitized tracklog
+data collected during a survey. These data should be in comma separated
+values text file format.
+
+\emph{Specifications:} Human and machine readable text format (JSON,
+CSV, or other).
+
+\emph{FileNamingScheme:} Deliverable YB07 should be named {[}YB07' YYYY
+Loon Survey Tracklogs{]} where YYYY represents the integer year of the
+survey.
+
+\bookmarksetup{startatroot}
+
+\chapter*{YB08: Lakes dataset}\label{yb08-lakes-dataset}
+\addcontentsline{toc}{chapter}{YB08: Lakes dataset}
+
+\markboth{YB08: Lakes dataset}{YB08: Lakes dataset}
+
+\emph{Format:} Human and machine readable text file format.
+
+\emph{Schedule:} Remeasurement + 1 year
+
+\emph{Responsibility:} PI
+
+\emph{Description:} Deliverable YB08 consists of a spatial data file
+containing the surveyed lakes polygons. These data should be in comma
+separated values text file format.
+
+\emph{Specifications:} Human and machine readable text format (JSON,
+CSV, or other).
+
+\emph{FileNamingScheme:} Deliverable YB08 should be named {[}YB08' YYYY
+Loon Survey Lakes dataset{]} where YYYY represents the integer year of
+the survey.
+
+\bookmarksetup{startatroot}
+
+\chapter*{YB09: Plots dataset}\label{yb09-plots-dataset}
+\addcontentsline{toc}{chapter}{YB09: Plots dataset}
+
+\markboth{YB09: Plots dataset}{YB09: Plots dataset}
+
+\emph{Format:} Human and machine readable text file format.
+
+\emph{Schedule:} Remeasurement + 1 year
+
+\emph{Responsibility:} PI
+
+\emph{Description:} Deliverable YB09 consists of a spatial data file
+containing the surveyed Plot polygons. These data should be in comma
+separated values text file format.
+
+\emph{Specifications:} Human and machine readable text format (JSON,
+CSV, or other).
+
+\emph{FileNamingScheme:} Deliverable YB09 should be named {[}YB09' YYYY
+Loon Survey Plots dataset{]} where YYYY represents the integer year of
+the survey.
+
+\bookmarksetup{startatroot}
+
+\chapter*{YB10: Deprecated}\label{yb10-deprecated}
+\addcontentsline{toc}{chapter}{YB10: Deprecated}
+
+\markboth{YB10: Deprecated}{YB10: Deprecated}
+
+\emph{Format:} Deprecated
+
+\emph{Schedule:} NA
+
+\emph{Responsibility:} NA
+
+\emph{Description:} NA
+
+\emph{Specifications:} NA
+
+\emph{FileNamingScheme:} Deliverable YB10 should be named {[}YB10' YYYY
+Loon Survey Deprecated{]} where YYYY represents the integer year of the
+survey.
+
+\bookmarksetup{startatroot}
+
+\chapter*{YB11: Photographs}\label{yb11-photographs}
+\addcontentsline{toc}{chapter}{YB11: Photographs}
+
+\markboth{YB11: Photographs}{YB11: Photographs}
+
+\emph{Format:} Tag Image File (\emph{.TIF, }.TIFF) is preferable. Joint
+Photographic Experts Group (\emph{.JPEG, }.JPG) is acceptable.
+
+\emph{Schedule:} Remeasurement + 1 year
+
+\emph{Responsibility:} PI
+
+\emph{Description:} Deliverable YB11 consists of photographs taken
+during a survey.
+
+\emph{Specifications:} Tag Image File Format.
+
+\emph{FileNamingScheme:} Deliverable YB11 should be named {[}YB11' YYYY
+Loon Survey Photographs{]} where YYYY represents the integer year of the
+survey.
+
+\bookmarksetup{startatroot}
+
+\chapter*{YB12: Data processing
+scripts}\label{yb12-data-processing-scripts}
+\addcontentsline{toc}{chapter}{YB12: Data processing scripts}
+
+\markboth{YB12: Data processing scripts}{YB12: Data processing scripts}
+
+\emph{Format:} NA
+
+\emph{Schedule:} NA
+
+\emph{Responsibility:} NA
+
+\emph{Description:} Deliverable YB12 consists of data processing
+scripts, database procedures, etc, that are used to cleanse, develop and
+certify the survey data products.
+
+\emph{Specifications:} Well documented.
+
+\emph{FileNamingScheme:} Deliverable YB12 should be named {[}YB12' YYYY
+Loon Survey Data processing scripts{]} where YYYY represents the integer
+year of the survey.
+
+\bookmarksetup{startatroot}
+
+\chapter{Data Management Lifecycle}\label{data-management-lifecycle}
+
+This section covers the data management life cycle for the Yellow-billed
+loons monitoring program after data is collected. For field data
+collection procedures and methods follow the standard operating
+procedures in (Flamme and Miller (2018), Figure XX.) available from the
+\href{https://irma.nps.gov/DataStore/Reference/Profile/2216938}{Yellow-billed
+loons Project Reference} in the NPS Data Store.
+
+\begin{itemize}
+\tightlist
+\item
+  Collect data according to the YBLO standard operating procedures
+\item
+  Organize and re-name raw data deliverable files s in the YBLO shared
+  network (O:\textbackslash) drive according to the
+  \href{DeliverablesSchedule.html}{Deliverables Schedule}.
+\item
+\end{itemize}
+
+\bookmarksetup{startatroot}
+
+\chapter{Procedure 1: Organize field
+deliverables}\label{procedure-1-organize-field-deliverables}
+
+\bookmarksetup{startatroot}
+
+\chapter{Database Integration}\label{database-integration}
+
+This book contains data management procedures for the National Park
+Service's Yellow-billed loons monitoring program in Bering Land Bridge
+National Preserve and Cape Krusenstern National Monument, Alaska. See
+(\textbf{knuth84?}) for additional discussion of literate programming.
+
+\bookmarksetup{startatroot}
+
+\chapter*{References}\label{references}
+\addcontentsline{toc}{chapter}{References}
+
+\markboth{References}{References}
+
+\phantomsection\label{refs}
+\begin{CSLReferences}{1}{0}
+\bibitem[\citeproctext]{ref-flamme2018}
+Flamme, J. H. Schmidt, M., and S. D. Miller. 2018. {``Yellow-Billed Loon
+Monitoring Protocol for the Arctic Network: Protocol Narrative Version
+1.0.''} Natural Resource Report NPS/ARCN/NRR---2018/1738. Fort Collins,
+Colorado: National Park Service.
+\url{https://irma.nps.gov/DataStore/Reference/Profile/2256435}.
+
+\end{CSLReferences}
+
+
+
+
+\end{document}

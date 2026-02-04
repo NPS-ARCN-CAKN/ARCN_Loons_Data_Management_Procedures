@@ -1,0 +1,12 @@
+```{r,include=FALSE,results='hide'}
+library(nomnoml)
+library(lubridate)
+```
+
+# Introduction {.unnumbered}
+
+This book contains data management procedures for the National Park Service's Yellow-billed loons monitoring program in Bering Land Bridge National Preserve and Cape Krusenstern National Monument, Alaska.
+
+See @flamme2018 for the monitoring protocol.
+
+# Resources

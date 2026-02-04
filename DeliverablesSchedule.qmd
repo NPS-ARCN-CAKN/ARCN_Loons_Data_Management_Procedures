@@ -1,0 +1,97 @@
+# Deliverables Schedule  {.unnumbered}
+
+```{r,include=FALSE,results='hide'}
+library(odbc)
+library(tidyverse)
+
+# Database connection
+Connection = dbConnect(odbc(),Driver = "Sql Server",Server = "inp2300irmadb01\\ntwk", Database = "AKRO")
+
+# Build a query
+Sql = "SELECT Identifier
+, Deliverable
+, [Format]
+, Schedule
+, Responsibility
+, Convert(Varchar(2000),[Description]) as [Description]
+, Convert(Varchar(2000),Specifications) as Specifications
+, Convert(Varchar(2000),FileNamingScheme) as FileNamingScheme
+, Convert(Varchar(2000),DataHandling) as DataHandling
+, Convert(Varchar(2000),QAQC) as QC
+, Convert(Varchar(2000),Archival) as Archival
+, Convert(Varchar(2000),BuilderTasks) as BuilderTasks
+, Convert(Varchar(2000),ValidatorTasks) as ValidatorTasks
+, Convert(Varchar(2000),CertifierTasks) as CertifierTasks
+, [Version], ProtocolID
+, SOP, SOPVersion,DeliverableID, VSID, NetworkID
+FROM vwDeliverablesSchedule2
+WHERE (ProtocolID = 35)
+ORDER BY Identifier"
+
+# Execute the query
+data = dbGetQuery(Connection,Sql)
+
+```
+
+The National Park Service's Western Yellow-billed Loons monitoring program will collect and maintain the following data deliverables. 
+Each mandatory deliverable should be fulfilled during a survey and delivered to the ARCN data manager for integration with the 
+master loons monitoring SQL Server database and the [NPS Data Store](https://irma.nps.gov/DataStore/Reference/Profile/2216938).
+
+```{r,echo=FALSE}
+knitr::kable(data %>% select(Identifier,Deliverable))
+
+```
+
+```{r,echo=FALSE,results='asis'}
+for(i in 1:nrow(data)){
+  Identifier = data[i,'Identifier']  
+  Deliverable = data[i,'Deliverable']  
+  Format = data[i,'Format']  
+  Schedule = data[i,'Schedule']  
+  Responsibility = data[i,'Responsibility']  
+  Description = data[i,'Description']  
+  Specifications = data[i,'Specifications']  
+  FileNamingScheme = data[i,'FileNamingScheme']  
+  DataHandling = data[i,'DataHandling']  
+  QC = data[i,'QC']  
+  Archival = data[i,'Archival']  
+  BuilderTasks = data[i,'BuilderTasks']  
+  ValidatorTasks = data[i,'ValidatorTasks']  
+  CertifierTasks = data[i,'CertifierTasks']  
+  Version = data[i,'Version']  
+  ProtocolID = data[i,'ProtocolID']  
+  SOP = data[i,'SOP']  
+  SOPVersion = data[i,'SOPVersion']  
+  DeliverableID = data[i,'DeliverableID']  
+  VSID = data[i,'VSID']  
+  NetworkID = data[i,'NetworkID']
+
+  cat("# ",Identifier,": ",Deliverable,"  \n\n",sep="")
+  cat("*Format:* ",Format,"  \n\n",sep="")  
+  cat("*Schedule:* ",Schedule,"  \n\n",sep="")  
+  cat("*Responsibility:* ",Responsibility,"  \n\n",sep="")  
+  cat("*Description:* ",Description,"  \n\n",sep="")  
+  cat("*Specifications:* ",Specifications,"  \n\n",sep="")  
+  cat("*FileNamingScheme:* ",FileNamingScheme,"  \n\n",sep="")  
+  # cat("*DataHandling:* ",DataHandling,"  \n\n",sep="")  
+  # cat("*QC:* ",QC,"  \n\n",sep="")  
+  # cat("*Archival:* ",Archival,"  \n\n",sep="")  
+  # cat("*BuilderTasks:* ",BuilderTasks,"  \n\n",sep="")  
+  # cat("*ValidatorTasks:* ",ValidatorTasks,"  \n\n",sep="")  
+  # cat("*CertifierTasks:* ",CertifierTasks,"  \n\n",sep="")  
+  # cat("*Version:* ",Version,"  \n\n",sep="")  
+  # cat("*ProtocolID:* ",ProtocolID,"  \n\n",sep="")  
+  # cat("*SOP:* ",SOP,"  \n\n",sep="")  
+  # cat("*SOPVersion:* ",SOPVersion,"  \n\n",sep="")  
+  # cat("*DeliverableID:* ",DeliverableID,"  \n\n",sep="")  
+  # cat("*VSID:* ",VSID,"  \n\n",sep="")  
+  # cat("*NetworkID:* ",NetworkID,"  \n\n",sep="") 
+  cat("  \n\n")
+}
+
+# for(Col in colnames(data)){
+#   # cat(Col," = data[i,'",Col,"']  \n",sep="")
+#   cat("cat(\"*",Col,":* \",",Col,",\"  \\n\\n\",sep=\"\")  \n",sep="")
+# }
+
+```

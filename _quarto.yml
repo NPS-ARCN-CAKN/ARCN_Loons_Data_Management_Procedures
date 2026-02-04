@@ -1,0 +1,29 @@
+project:
+  type: book
+
+book:
+  title: "ARCN Loons Data Management Procedures"
+  author: "Scott D. Miller\n\nData Manager"
+  date: "12/17/2025"
+  chapters:
+    - index.qmd
+    - DeliverablesSchedule.qmd
+    - ProjectLifeCycle.qmd
+    - References.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    number-sections: false
+    theme:
+      - cosmo
+      - brand
+  pdf:
+    number-sections: false
+    documentclass: scrreprt
+
+params:
+  projectReference: "https://irma.nps.gov/DataStore/Reference/Profile/2216938"
+
+

@@ -1,0 +1,156 @@
+# Database Integration
+
+Database integration is the process of cleaning and processing raw field survey data and migrating it to the master loons SQL Server database.
+
+Major steps:
+
+-   Combine field data files into a single raw data deliverable
+
+-   Clean the raw data.
+
+-   Perform quality control
+
+-   Migrate the data into the master loons database.
+
+# Combine field data files into a single raw data deliverable
+
+There is no one standard way of combining loon survey data into a single raw data file. This is especially true as the loons field computing situation has continually changed faster than the SOPs can keep up (paper/pencil/GPS -\> ArcPad -\> Park Observer -\> ?).
+
+In the 2020s, we used Park Observer which gave a series of CSV files containing survey data. Each survey team yielded a set of CSVs. The loons biotech combined them in GIS and supplied the Plot and Lake designations using spatial joins and manual editing. From there the data manager extracted the loon observation data to CSV files and imported them into the database using Microsoft SQL Server Management Studio or R or other tools.
+
+The data manager also bypassed the geodatabase and used R to iterate through the loons data directories to automatically combine CSV data files into a single data source that could then be imported into the database. In some cases the Lake attribute was left NULL because the lakes polygon spatial data continually changed and updated so it seemed pointless to assign observations to lakes that may have drained, combined or otherwise changed considerably since collection. The user can pull the certified loon dataset from Data Store and join the data to the lakes layer of their choosing.
+
+The point is to pull the loon data together into a single CSV, do quality control, ingest the data into the database and then archive the deliverable in Data Store using whatever skills and tools available.
+
+Here is an example of how I did this using R for the 2023 data:
+
+```{r}
+
+# Function to convert park observer ISO dates to actual dates
+# ISODateToDate <- function(input_string) {
+#   # Convert ISO 8601 string to a proper date-time object
+#   parsed_datetime <- ymd_hms(input_string)
+#   return(parsed_datetime)
+# }
+# Example usage
+# data$SamplingDate = extract_datetime(data$Timestamp_Local)
+
+# The target directory holding all the Park Observer .csv files
+dir = r'(O:\Monitoring\Vital Signs\Yellow-billed Loons\Data\2023\As received)'
+
+# Get the sub-directories
+sub_dirs <- list.dirs(dir, recursive = FALSE)
+
+# Initialize an empty list to store data
+data_list <- list()
+
+# Loop through subdirectories
+for (subdir in sub_dirs) {
+  
+  # Make a path to the Loons.csv file  
+  LoonFile <- file.path(subdir, "Loons.csv")  # Define file path
+    
+  # Loons Files
+  if (file.exists(LoonFile)) {
+
+    # Load the data from the Loons.csv file into a data frame
+    df <- read.csv(LoonFile, stringsAsFactors = FALSE)
+
+          # If we get rows
+      if(nrow(df)>0){
+        df$Filename <- basename(subdir)  # Extract only folder name
+        data_list[[subdir]] <-df
+      }
+  }
+}
+
+# Combine all data into a single data frame
+data <- do.call(rbind, data_list)
+
+# Add tail number from the file name
+data$TailNo <- substr(sub('YBLO','',data$Filename),1,regexpr("-", sub('YBLO','',data$Filename))[[1]]-1)
+
+# Convert the date from ISO to a DateTime
+data$ObservationDate = ISODateToDate(data$Timestamp_Local)
+
+# Clear the useless row names
+rownames(data) = NULL
+
+# Write the combined loons observation data to a file
+deliverableFile = paste(dir,"/YB06 ",data[1,'Year']," Loon Survey Data.csv",sep="")
+# write.csv(data, file = deliverableFile, row.names = FALSE, na = "", quote = FALSE)
+
+
+```
+
+# Clean the raw data.
+
+# Perform quality control
+
+# Migrate the data into the master loons database.
+
+This example loads the data from the 2017 loon survey raw field data deliverable
+
+```{r}
+# This is the file exported from the O:\Monitoring\Vital Signs\Yellow-billed Loons\Data\2017\YB01_FinalSurveyData geodatabase above
+datafile = r'(C:\Work\VitalSigns\ARCN Western Yellow-billed Loons\Data\2017\FieldData-Working\YB06 2017 Loons Survey Raw Data Deliverable.csv)'
+
+# Read in the data
+data = read.csv(datafile)
+
+# Convert the Park Observer ISO date to a datetime
+data$ObservationDatetime = as.Date(ISODateToDate(data$Timestamp_Local))
+
+# Extract the year 
+data$Year = as.integer(lubridate::year(data$ObservationDatetime))
+
+# Add in the Park
+data = data %>% mutate(Park = ifelse(Plot %in% c(1,2,3,4,5,6),'CAKR','BELA')) 
+#data2 %>% distinct(Park)
+
+
+# Make a new dataset that conforms to the column definitions in the YBLO master database.
+data2 = data %>% select(Year,
+                Park,
+                Plot,
+                Lake=LakeID,
+                Species=species,
+                Count=count_,
+                Species2=species2,
+                IsNest=nest,
+                IsPair=pair,
+                Eggs=countEggs,
+                Chicks=countChicks,
+                Location=location,
+                Activity=activity,
+                ObservationDatetime,
+                Longitude=Feature_Longitude,
+                Latitude=Feature_Latitude,
+                Observer = Recorder,
+                TailNumber = Vessel,
+                Notes
+          ) 
+
+# Lake is messed up by non-numeric entries
+# data2 %>% distinct(Lake) %>% arrange(Lake)
+# Many Lake values which should be numeric set to 'OUT'.
+#Set OUT observations to incidental observations. NA the OUT Lake records for Lake field.
+data2 = data2 %>% mutate(IsIncidentalObservation = ifelse(Lake=='OUT',as.integer(1),as.integer(0)))
+data2 = data2 %>% mutate(Lake = ifelse(Lake=='OUT',NA,Lake))
+data2$Lake = as.integer(data2$Lake)
+
+# There are a ton of non-loon records
+library(stringr)
+# Omit non-loon records. They are not part of the protocol. People can get them from the geodatabase if they want them.
+data2 = data2 %>% filter(str_sub(Species, -2) == "LO")
+
+# 4 records have no plot designations or spatial coordinates. We can't know where these records were recorded.
+data2 %>% filter(is.na(Plot))
+# No notes or explanations given. We need to drop these, none are YBLO
+data2 = data2 %>% filter(!is.na(Plot))
+
+# Append the source file name as a column
+data2$SourceFile ='YB06 2017 Loon Survey Data.csv'
+
+# data2
+```
