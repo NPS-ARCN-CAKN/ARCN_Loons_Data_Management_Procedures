@@ -142,7 +142,7 @@ The NPS Arctic Network applies a tiered approach to communicating data quality. 
 Table 1. Data quality definitions. The CertificationLevel is an attribute of the database's `SurveyData` table.
 
 | Certification level | Definition |
-|--------------------|----------------------------------------------------|
+|----|----|
 | Raw | Raw data that have not undergone any processing for quality. |
 | Provisional | Provisional records have undergone quality control checks, defects have been rectified and/or documented and the survey results are suitable for internal reports. Observations have not been certified for release by the principal investigator, or have not been validated with a report or published journal article. |
 | Certified | Certified records have undergone rigorous quality control checks, defects have been rectified and/or documented and the survey results have been validated with a report or published journal article or have been approved for release by the principal investigator. Certified records are analytical grade. |
@@ -164,7 +164,7 @@ Loons monitoring data must be published to the NPS Data Store in two ways (Table
 Table 1. Two major methods of data publication in the NPS Data Store. Both methods must respect protected data mandates.
 
 | Dataset type | Public | Analytical grade | Description |
-|-----------|-----|----------|-----------------------------------------------|
+|----|----|----|----|
 | Annual survey files | No | No | This dataset type consists of data files and documentation from an individual, annual loon survey. *These data are archival grade and are not certified for analysis*. They are retained in Data Store in case errors are detected, or clarification is needed in the future. |
 | [Certified cumulative dataset](https://irma.nps.gov/DataStore/Reference/Profile/2316912)\* | No | Yes | The certified, cumulative dataset is intended for analytical use. Each survey year data are processed for quality and appended into the master loons monitoring SQL Server database. Once data are certified new data and metadata files are exported and the [Certified Dataset Reference](https://irma.nps.gov/DataStore/Reference/Profile/2316912)\* is [versioned](https://irma.nps.gov/DataStore/DownloadFile/717239), modified, and the new files attached. |
 
